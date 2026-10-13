@@ -1,0 +1,302 @@
+Build a complete mobile-first Nigerian game portal using HTML, CSS, JavaScript, PHP, and MySQL.
+
+The platform should be a lightweight, fun, addictive game portal where users can log in with their phone number and access five simple games. The design should feel modern, colourful, fast, youthful, and suitable for the Nigerian audience.
+
+The portal name can be: FabGames.
+
+Core Requirement:
+Users do not register directly on this portal. Registration/subscription happens from an external source. When a user enters their phone number, the system should call an external API endpoint to check if the user has an active game token/subscription. If the API confirms the user is active, allow login and create a local session. If not active, show a message telling the user to subscribe/sign up first.
+
+Technology:
+Frontend: HTML, CSS, JavaScript
+Backend: PHP
+Database: MySQL
+Must be fully mobile responsive
+Must work well on low-end Android phones
+Use clean code structure
+Use AJAX/fetch for API calls where needed
+Use PHP sessions for login
+Use MySQL for storing users, game scores, admin data, push tokens, and reports
+
+Pages Needed:
+
+1. Landing Page
+   Create a beautiful landing page with:
+
+* Hero section
+* Game portal name
+* Short description
+* “Join / Login” button
+* Preview of the 5 games
+* Nigerian-style fun visuals
+* Mobile-first layout
+* Clear call-to-action
+
+2. Login Page
+   User enters phone number in Nigerian format, example: 08012345678.
+   When submitted:
+
+* Validate phone number
+* Call external token-check API
+* If active, log user in
+* If inactive, show “You need to subscribe before playing”
+* Store user phone number locally if not already stored
+* Start user session
+
+Example external API logic:
+POST to: https://your-api-endpoint.com/check-token
+Payload:
+{
+"phone": "08012345678"
+}
+
+Expected success response:
+{
+"status": true,
+"active": true,
+"message": "User active"
+}
+
+Expected failed response:
+{
+"status": false,
+"active": false,
+"message": "No active token"
+}
+
+3. User Dashboard
+   After login, users should see:
+
+* Welcome message
+* Five game cards
+* High score
+* Last played game
+* Total games played
+* Leaderboard preview
+* Notification prompt permission
+* Logout button
+
+Five Games To Build:
+
+Game 1: Zombie Shooter
+A simple tap-to-shoot game.
+
+* Zombies move toward the player
+* User taps/clicks to shoot
+* Score increases per zombie killed
+* Game ends when zombie reaches player
+* Increase speed over time
+* Save score
+
+Game 2: Bubble Shooter
+A simple bubble matching game.
+
+* User shoots coloured bubbles
+* Match 3 or more to clear
+* Score increases per cleared bubble
+* Simple levels
+* Save score
+
+Game 3: Fruit Slice
+A fruit slicing game.
+
+* Fruits move/fly on screen
+* User swipes or drags to slice
+* Avoid bombs
+* Score increases per fruit sliced
+* Game ends after 3 missed fruits or bomb hit
+* Save score
+
+Game 4: Stickman Shooter
+A simple side-view shooting game.
+
+* Stickman player shoots incoming enemies
+* User can move left/right
+* Tap shoot button
+* Enemy waves increase
+* Save score
+
+Game 5: Danfo Dodge / Naija Traffic Runner
+A Nigerian-themed avoiding game.
+
+* Player controls a small character or danfo-style avatar
+* Obstacles come from top/bottom or forward
+* Player moves left and right to avoid obstacles
+* Obstacles can include potholes, danfo buses, okadas, market carts, roadblocks
+* Game gets faster over time
+* Score increases based on survival time
+* Save score
+
+Game Design Requirements:
+
+* All games should be simple and playable inside the browser
+* Use HTML5 Canvas for games
+* Mobile controls must be smooth
+* Games should have start, pause, resume, restart, and exit buttons
+* Display current score and high score
+* Add sound toggle
+* Add vibration feedback where supported
+* Save score to database after each game ends
+* Keep games lightweight and fast
+
+Admin Panel:
+Create an admin dashboard with secure login.
+
+Admin Features:
+
+* View total users
+* View active users
+* View users by phone number
+* View total games played
+* View most played games
+* View highest scores
+* View leaderboard
+* View daily, weekly, and monthly reports
+* Send push notifications
+* Manage notification title and message
+* View notification history
+* Disable or enable users locally
+* Export reports as CSV
+
+Push Notification Requirement:
+Use browser push notification support.
+
+* Ask users to allow notifications after login
+* Store push subscription/token in database
+* Admin can send notifications to all users
+* Admin can send notification to a single phone number
+* Admin can send notification to users who played a specific game
+* Include a service worker file for push notifications
+
+Suggested Database Tables:
+
+users:
+
+* id
+* phone
+* status
+* last_login
+* total_games_played
+* created_at
+* updated_at
+
+game_scores:
+
+* id
+* user_id
+* game_name
+* score
+* duration
+* created_at
+
+push_subscriptions:
+
+* id
+* user_id
+* endpoint
+* p256dh
+* auth
+* created_at
+
+notifications:
+
+* id
+* title
+* message
+* target_type
+* target_value
+* sent_count
+* created_at
+
+admins:
+
+* id
+* name
+* email
+* password
+* created_at
+
+activity_logs:
+
+* id
+* user_id
+* action
+* details
+* created_at
+
+Reporting:
+Admin should be able to see:
+
+* Total users
+* New users today
+* Active users today
+* Total game plays
+* Game plays per game
+* Highest scoring users
+* Average session duration
+* Daily activity chart
+* Most played game
+* Push notification delivery count if possible
+
+Frontend Style:
+Use a modern Nigerian youth-friendly interface:
+
+* Bright colours
+* Smooth cards
+* Game icons
+* Rounded corners
+* Mobile-first design
+* Bottom navigation on mobile
+* Fast loading
+* Simple animations
+* Good empty states
+* Clean dashboard
+
+Security:
+
+* Sanitize all inputs
+* Validate phone numbers
+* Use prepared statements in PHP
+* Hash admin passwords
+* Protect admin pages with sessions
+* Prevent direct access to user dashboard without login
+* Use CSRF token for admin forms
+* Do not expose API secrets on frontend
+
+Folder Structure:
+/
+index.php
+login.php
+dashboard.php
+logout.php
+/games
+zombie-shooter.php
+bubble-shooter.php
+fruit-slice.php
+stickman-shooter.php
+danfo-dodge.php
+/admin
+login.php
+dashboard.php
+users.php
+reports.php
+notifications.php
+/api
+check-token.php
+save-score.php
+leaderboard.php
+register-push.php
+send-notification.php
+/assets
+/css
+/js
+/images
+/service-worker.js
+/config
+database.php
+auth.php
+
+Important:
+Make the game portal production-ready, clean, and easy to extend. The final output should include all frontend pages, backend PHP files, database SQL schema, JavaScript game logic, admin panel, push notification setup, and API integration placeholders.
+
+The most important goal is simplicity, addictive gameplay, mobile responsiveness, and a clean Nigerian-themed user experience.

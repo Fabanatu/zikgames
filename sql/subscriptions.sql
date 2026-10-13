@@ -1,0 +1,8 @@
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS subscription_active TINYINT(1) NOT NULL DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS subscription_start_at DATETIME NULL,
+  ADD COLUMN IF NOT EXISTS subscription_end_at DATETIME NULL,
+  ADD COLUMN IF NOT EXISTS subscription_shortcode VARCHAR(50) NULL,
+  ADD COLUMN IF NOT EXISTS subscription_keyword VARCHAR(100) NULL,
+  ADD COLUMN IF NOT EXISTS subscription_updated_at DATETIME NULL;
+

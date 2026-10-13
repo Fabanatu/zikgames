@@ -1,0 +1,8 @@
+.agents/
+.codex/
+.env
+.env.*
+config/database.local.php
+*.log
+*.tmp
+*.bak
